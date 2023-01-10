@@ -68,7 +68,7 @@ class _ProductOverviewPageState extends State<ProductOverviewPage> {
       body: Row(
         children: [
           NavigationRail(
-            backgroundColor: Color.fromARGB(255, 167, 210, 245),
+            backgroundColor: const Color.fromARGB(255, 167, 210, 245),
             selectedIndex: _selectedIndex,
             groupAlignment: groupAligment,
             onDestinationSelected: (int index) {

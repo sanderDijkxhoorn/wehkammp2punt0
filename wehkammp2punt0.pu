@@ -1,5 +1,16 @@
 @startuml wehkammp2punt0
 
+Package "ProductOverviewP" {
+  class "ProductOverviewPage"
+  class "_ProductOverviewPageState"
+}
+
+Product *-- ProductOverviewP
+ProductItem *-- ProductOverviewP
+
+ProductItem --* PhotoHero
+HeroAnimation *-- PhotoHero
+
 class "Product" {
   +String id
   +String title
@@ -7,12 +18,6 @@ class "Product" {
   +double price
   +String imageUrl
   +bool isFavorite
-}
-
-class "HeroAnimation" {
-  +String imageurL
-  +String description
-  +double price
 }
 
 class "ProductItem" {
@@ -27,6 +32,12 @@ class "PhotoHero" {
   +String photo
   +void Function() onTap
   +double width
+}
+
+class "HeroAnimation" {
+  +String imageurL
+  +String description
+  +double price
 }
 
 class "ProductOverviewPage" {
