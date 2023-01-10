@@ -1,7 +1,6 @@
 @startuml wehkammp2punt0
-set namespaceSeparator ::
 
-class "wehkammp2punt0::models::product.dart::Product" {
+class "Product" {
   +String id
   +String title
   +String description
@@ -10,54 +9,32 @@ class "wehkammp2punt0::models::product.dart::Product" {
   +bool isFavorite
 }
 
-class "wehkammp2punt0::main.dart::MyApp" {
-  +Widget build()
-}
-
-"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "wehkammp2punt0::main.dart::MyApp"
-
-class "wehkammp2punt0::components::hero_animation.dart::HeroAnimation" {
+class "HeroAnimation" {
   +String imageurL
   +String description
   +double price
-  +Widget build()
 }
 
-"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "wehkammp2punt0::components::hero_animation.dart::HeroAnimation"
-
-class "wehkammp2punt0::components::product_item.dart::ProductItem" {
+class "ProductItem" {
   +String id
   +String title
   +String imageUrl
   +String description
   +double price
-  +Widget build()
 }
 
-"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "wehkammp2punt0::components::product_item.dart::ProductItem"
-
-class "wehkammp2punt0::components::photo_hero.dart::PhotoHero" {
+class "PhotoHero" {
   +String photo
   +void Function() onTap
   +double width
-  +Widget build()
 }
 
-"wehkammp2punt0::components::photo_hero.dart::PhotoHero" o-- "dart::ui::void Function()"
-"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "wehkammp2punt0::components::photo_hero.dart::PhotoHero"
-
-class "wehkammp2punt0::pages::products_overview_page.dart::ProductOverviewPage" {
+class "ProductOverviewPage" {
   +State<ProductOverviewPage> createState()
 }
 
-"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "wehkammp2punt0::pages::products_overview_page.dart::ProductOverviewPage"
-
-class "wehkammp2punt0::pages::products_overview_page.dart::_ProductOverviewPageState" {
+class "_ProductOverviewPageState" {
   +List<Product> loadedProducts
-  +Widget build()
 }
-
-"flutter::src::widgets::framework.dart::State" <|-- "wehkammp2punt0::pages::products_overview_page.dart::_ProductOverviewPageState"
-
 
 @enduml

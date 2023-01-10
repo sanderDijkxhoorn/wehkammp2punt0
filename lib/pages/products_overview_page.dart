@@ -53,30 +53,89 @@ class _ProductOverviewPageState extends State<ProductOverviewPage> {
     ),
   ];
 
+  int _selectedIndex = 0;
+  NavigationRailLabelType labelType = NavigationRailLabelType.selected;
+  bool showLeading = false;
+  bool showTrailing = true;
+  double groupAligment = 0.0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Wehkammp'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: GridView.builder(
-          itemCount: loadedProducts.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 3 / 2,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
+      body: Row(
+        children: [
+          NavigationRail(
+            backgroundColor: Color.fromARGB(255, 167, 210, 245),
+            selectedIndex: _selectedIndex,
+            groupAlignment: groupAligment,
+            onDestinationSelected: (int index) {
+              setState(() {
+                _selectedIndex = index;
+              });
+            },
+            labelType: labelType,
+            leading: showLeading
+                ? FloatingActionButton(
+                    elevation: 0,
+                    onPressed: () {
+                      // Add your onPressed code here!
+                    },
+                    child: const Icon(Icons.add),
+                  )
+                : const SizedBox(),
+            trailing: showTrailing
+                ? IconButton(
+                    onPressed: () {
+                      // Add your onPressed code here!
+                    },
+                    icon: const Icon(Icons.more_horiz_rounded),
+                  )
+                : const SizedBox(),
+            destinations: const <NavigationRailDestination>[
+              NavigationRailDestination(
+                icon: Icon(Icons.favorite_border),
+                selectedIcon: Icon(Icons.favorite),
+                label: Text('Like'),
+              ),
+              NavigationRailDestination(
+                icon: Icon(Icons.bookmark_border),
+                selectedIcon: Icon(Icons.book),
+                label: Text('Save'),
+              ),
+              NavigationRailDestination(
+                icon: Icon(Icons.star_border),
+                selectedIcon: Icon(Icons.star),
+                label: Text('Review'),
+              ),
+            ],
           ),
-          itemBuilder: (BuildContext context, int index) => ProductItem(
-            id: loadedProducts[index].id,
-            title: loadedProducts[index].title,
-            imageUrl: loadedProducts[index].imageUrl,
-            description: loadedProducts[index].description,
-            price: loadedProducts[index].price,
+          const VerticalDivider(thickness: 1, width: 1),
+          // This is the main content.
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: GridView.builder(
+                itemCount: loadedProducts.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 1 / 1.5,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                ),
+                itemBuilder: (BuildContext context, int index) => ProductItem(
+                  id: loadedProducts[index].id,
+                  title: loadedProducts[index].title,
+                  imageUrl: loadedProducts[index].imageUrl,
+                  description: loadedProducts[index].description,
+                  price: loadedProducts[index].price,
+                ),
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
